@@ -1,8 +1,13 @@
-var http = require('http');
+var express = require('express');
+var app = express();
+var router = express.Router();
 
-http.createServer(function (request, response) {
-    response.writeHead(200, {'Content-Type': 'text/plain'});
-    response.end('Hello World\n');
-}).listen(8080);
+app.use(router);
+require('./routes')(router);
 
-console.log('Server started');
+var server = app.listen(3000, function () {
+  var host = server.address().address;
+  var port = server.address().port;
+
+  console.log('Example app listening at http://%s:%s', host, port);
+});
